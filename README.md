@@ -1,3 +1,3 @@
-# cs769-assignments
+# CS769-assignments
 
-Homework Implementations
+[Implementations](https://github.com/xtie97/CS769_Advanced_NLP/tree/xtie97-implementation)
