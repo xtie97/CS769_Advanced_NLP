@@ -1,3 +1,3 @@
-# cs769-assignments
+# CS769-assignments
 
 Implementations
