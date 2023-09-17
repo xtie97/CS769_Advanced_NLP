@@ -79,7 +79,13 @@ def pad_sentences(sents, pad_id):
     Return:
         aug_sents: list(list(int)), |s_1| == |s_i|, for s_i in sents
     """
-    raise NotImplementedError()
+    #raise NotImplementedError()
+    max_len = max([len(s) for s in sents])
+    aug_sents = []
+    for s in sents:
+        aug_sents.append(s + [pad_id] * (max_len - len(s)))
+    return aug_sents
+    
 
 def compute_grad_norm(model, norm_type=2):
     """
@@ -155,8 +161,8 @@ def main():
     print('nwords', nwords, 'ntags', ntags)
     model = mn.DanModel(args, word_vocab, len(tag_vocab)).to(device)
     loss_func = nn.CrossEntropyLoss()
-    optimizer = torch.optim.Adagrad(model.parameters(), lr=args.lrate, lr_decay=args.lrate_decay)
-
+    optimizer = torch.optim.Adagrad(model.parameters(), lr=args.lrate, lr_decay=args.lrate_decay, weight_decay=1e-5)
+    #optimizer = torch.optim.Adam(model.parameters(), lr=args.lrate, weight_decay=1e-5)
     # Training
     start_time = time.time()
     train_iter = 0

@@ -39,7 +39,20 @@ def load_embedding(vocab, emb_file, emb_size):
     Return:
         emb: (np.array), embedding matrix of size (|vocab|, emb_size) 
     """
-    raise NotImplementedError()
+    #raise NotImplementedError()
+    
+    print(f'Loading embedding file: {emb_file}')
+    emb = np.zeros((len(vocab), emb_size), dtype=np.float32)
+    # read "glove.42B.300d/glove.42B.300d.txt"
+    with open(emb_file, 'r', encoding='utf-8') as f:
+        for line in f:
+            line = line.split()
+            word = line[0]
+            if word in vocab.word2id:
+                idx = vocab.word2id[word]
+                emb[idx][:] = np.array(line[1:]).astype(np.float32)
+
+    return emb
 
 
 class DanModel(BaseModel):
@@ -57,21 +70,37 @@ class DanModel(BaseModel):
         Define the model's parameters, e.g., embedding layer, feedforward layer.
         Pass hyperparameters explicitly or use self.args to access the hyperparameters.
         """
-        raise NotImplementedError()
+        self.embedding = nn.Embedding(len(self.vocab), self.args.emb_size, padding_idx=0)
+        fc = [nn.Dropout(self.args.emb_drop), nn.Linear(self.args.emb_size, self.args.hid_size, bias=True), nn.ReLU()] 
+        if self.args.hid_layer > 2:
+            for _ in range(self.args.hid_layer-2):
+                fc += [nn.Dropout(self.args.hid_drop), nn.Linear(self.args.hid_size, self.args.hid_size, bias=True), nn.ReLU()]  
+        fc += [nn.Dropout(self.args.hid_drop), nn.Linear(self.args.hid_size, self.tag_size, bias=True)] 
+        self.fc = nn.Sequential(*fc)
+
 
     def init_model_parameters(self):
         """
         Initialize the model's parameters by uniform sampling from a range [-v, v], e.g., v=0.08
         Pass hyperparameters explicitly or use self.args to access the hyperparameters.
         """
-        raise NotImplementedError()
-
+        # initalize weights and bias
+        if isinstance(self.embedding, nn.Embedding):
+            nn.init.xavier_uniform_(self.embedding.weight.data)
+        
+        if isinstance(self.fc, nn.Sequential):
+            for layer in self.fc:
+                if isinstance(layer, nn.Linear):
+                    nn.init.xavier_uniform_(layer.weight.data)
+                    nn.init.constant_(layer.bias.data, 0)
+         
     def copy_embedding_from_numpy(self):
         """
         Load pre-trained word embeddings from numpy.array to nn.embedding
         Pass hyperparameters explicitly or use self.args to access the hyperparameters.
         """
-        raise NotImplementedError()
+        emb = load_embedding(self.vocab, self.args.emb_file, self.args.emb_size)
+        self.embedding.weight.data.copy_(torch.from_numpy(emb))
 
     def forward(self, x):
         """
@@ -84,4 +113,21 @@ class DanModel(BaseModel):
         Return:
             scores: (torch.FloatTensor), [batch_size, ntags]
         """
-        raise NotImplementedError()
+        # three 300-d ReLu layers,word dropout probability p=0.3, L2 regularization weight = 1e-5 applied to all parameters
+
+        rw = torch.distributions.bernoulli.Bernoulli(1-self.args.word_drop).sample((x.shape[1], )) # x.shape[1] = seq_length
+        x = x[:, rw==1] # word dropout (does not work well)
+
+        x = self.embedding(x) # [batch_size, seq_length, emb_size]
+        if self.args.pooling_method == "sum":
+            x = torch.sum(x, dim=1)
+        elif self.args.pooling_method == "avg":
+            x = torch.mean(x, dim=1)
+        elif self.args.pooling_method == "max":
+            x = torch.max(x, dim=1)
+        else:
+            raise Exception("Pooling method not applicable")
+
+        scores = self.fc(x)
+        return scores
+

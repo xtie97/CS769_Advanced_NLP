@@ -1,0 +1,77 @@
+Reading package lists...
+Building dependency tree...
+Reading state information...
+unzip is already the newest version (6.0-25ubuntu1.1).
+0 upgraded, 0 newly installed, 0 to remove and 154 not upgraded.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+unzip is already the newest version (6.0-25ubuntu1.1).
+0 upgraded, 0 newly installed, 0 to remove and 154 not upgraded.
+RUN: {'train': 'data/sst-train.txt', 'dev': 'data/sst-dev.txt', 'test': 'data/sst-test.txt', 'emb_file': None, 'emb_size': 300, 'hid_size': 300, 'hid_layer': 3, 'word_drop': 0.0, 'emb_drop': 0.2, 'hid_drop': 0.2, 'pooling_method': 'avg', 'grad_clip': 5.0, 'max_train_epoch': 5, 'batch_size': 16, 'lrate': 0.005, 'lrate_decay': 0, 'mrate': 0.85, 'log_niter': 100, 'eval_niter': 500, 'model': '9081372113/sst-model.pt', 'dev_output': '9081372113/sst-dev-output.txt', 'test_output': '9081372113/sst-test-output.txt'}
+nwords 16583 ntags 5
+Epoch 0, iter 100, train set: loss=1.5770, accuracy=0.27 (431/1600), gradient_norm=0.36, params_norm=22.76, time=0.99s
+Epoch 0, iter 200, train set: loss=1.5555, accuracy=0.30 (478/1600), gradient_norm=0.67, params_norm=23.22, time=1.38s
+Epoch 0, iter 300, train set: loss=1.5123, accuracy=0.34 (542/1600), gradient_norm=1.09, params_norm=24.63, time=1.78s
+Epoch 0, iter 400, train set: loss=1.4279, accuracy=0.38 (600/1600), gradient_norm=0.85, params_norm=25.85, time=2.15s
+Epoch 0, iter 500, train set: loss=1.4077, accuracy=0.39 (625/1600), gradient_norm=1.03, params_norm=26.81, time=2.51s
+Evaluate dev data:
+  -Accuracy: 0.3806 (419/1101)
+  -Update best model at 500, dev accuracy=0.3806
+Saving model to 9081372113/sst-model.pt
+Epoch 1, iter 600, train set: loss=1.2646, accuracy=0.44 (709/1600), gradient_norm=1.27, params_norm=28.15, time=3.48s
+Epoch 1, iter 700, train set: loss=1.1762, accuracy=0.48 (768/1600), gradient_norm=1.83, params_norm=29.34, time=3.73s
+Epoch 1, iter 800, train set: loss=1.1802, accuracy=0.47 (751/1600), gradient_norm=2.37, params_norm=30.26, time=3.98s
+Epoch 1, iter 900, train set: loss=1.1614, accuracy=0.50 (805/1600), gradient_norm=2.07, params_norm=31.05, time=4.23s
+Epoch 1, iter 1000, train set: loss=1.1733, accuracy=0.48 (763/1600), gradient_norm=2.22, params_norm=31.77, time=4.47s
+Evaluate dev data:
+  -Accuracy: 0.4151 (457/1101)
+  -Update best model at 1000, dev accuracy=0.4151
+Saving model to 9081372113/sst-model.pt
+Epoch 2, iter 1100, train set: loss=1.1088, accuracy=0.52 (833/1600), gradient_norm=1.31, params_norm=32.53, time=5.50s
+Epoch 2, iter 1200, train set: loss=0.9549, accuracy=0.60 (953/1600), gradient_norm=1.46, params_norm=33.45, time=5.86s
+Epoch 2, iter 1300, train set: loss=0.9325, accuracy=0.62 (997/1600), gradient_norm=1.42, params_norm=34.31, time=6.20s
+Epoch 2, iter 1400, train set: loss=0.9148, accuracy=0.64 (1022/1600), gradient_norm=2.36, params_norm=35.08, time=6.54s
+Epoch 2, iter 1500, train set: loss=0.9052, accuracy=0.64 (1019/1600), gradient_norm=2.91, params_norm=35.82, time=6.91s
+Evaluate dev data:
+  -Accuracy: 0.3960 (436/1101)
+Epoch 2, iter 1600, train set: loss=0.9348, accuracy=0.63 (1014/1600), gradient_norm=3.71, params_norm=36.42, time=7.62s
+Epoch 3, iter 1700, train set: loss=0.7375, accuracy=0.74 (1187/1600), gradient_norm=1.51, params_norm=37.24, time=7.95s
+Epoch 3, iter 1800, train set: loss=0.7207, accuracy=0.73 (1162/1600), gradient_norm=2.24, params_norm=37.92, time=8.27s
+Epoch 3, iter 1900, train set: loss=0.7107, accuracy=0.73 (1174/1600), gradient_norm=3.07, params_norm=38.58, time=8.62s
+Epoch 3, iter 2000, train set: loss=0.7392, accuracy=0.73 (1170/1600), gradient_norm=2.25, params_norm=39.17, time=8.98s
+Evaluate dev data:
+  -Accuracy: 0.3769 (415/1101)
+Epoch 3, iter 2100, train set: loss=0.7398, accuracy=0.71 (1137/1600), gradient_norm=2.87, params_norm=39.69, time=9.69s
+Epoch 4, iter 2200, train set: loss=0.6372, accuracy=0.78 (1243/1600), gradient_norm=1.87, params_norm=40.27, time=10.03s
+Epoch 4, iter 2300, train set: loss=0.5710, accuracy=0.80 (1286/1600), gradient_norm=2.09, params_norm=40.77, time=10.36s
+Epoch 4, iter 2400, train set: loss=0.5551, accuracy=0.81 (1303/1600), gradient_norm=1.95, params_norm=41.31, time=10.70s
+Epoch 4, iter 2500, train set: loss=0.6005, accuracy=0.79 (1269/1600), gradient_norm=1.93, params_norm=41.80, time=11.07s
+Evaluate dev data:
+  -Accuracy: 0.3724 (410/1101)
+Epoch 4, iter 2600, train set: loss=0.5521, accuracy=0.81 (1296/1600), gradient_norm=3.03, params_norm=42.24, time=11.78s
+Loading model from 9081372113/sst-model.pt
+  -Accuracy: 0.4371 (966/2210)
+  -Save predictions to 9081372113/sst-test-output.txt
+  -Accuracy: 0.4151 (457/1101)
+  -Save predictions to 9081372113/sst-dev-output.txt
+
+
+
+RUN: {'train': 'data/cfimdb-train.txt', 'dev': 'data/cfimdb-dev.txt', 'test': 'data/cfimdb-test.txt', 'emb_file': None, 'emb_size': 300, 'hid_size': 300, 'hid_layer': 3, 'word_drop': 0.0, 'emb_drop': 0.2, 'hid_drop': 0.2, 'pooling_method': 'avg', 'grad_clip': 5.0, 'max_train_epoch': 5, 'batch_size': 16, 'lrate': 0.005, 'lrate_decay': 0, 'mrate': 0.85, 'log_niter': 100, 'eval_niter': 500, 'model': '9081372113/cfimdb-model.pt', 'dev_output': '9081372113/cfimdb-dev-output.txt', 'test_output': '9081372113/cfimdb-test-output.txt'}
+nwords 20776 ntags 2
+Epoch 0, iter 100, train set: loss=0.5704, accuracy=0.69 (1101/1600), gradient_norm=1.73, params_norm=29.34, time=1.21s
+Epoch 1, iter 200, train set: loss=0.1248, accuracy=0.96 (1537/1595), gradient_norm=0.09, params_norm=32.47, time=1.77s
+Epoch 2, iter 300, train set: loss=0.0357, accuracy=0.99 (1584/1595), gradient_norm=1.66, params_norm=33.24, time=2.32s
+Epoch 3, iter 400, train set: loss=0.0160, accuracy=1.00 (1591/1595), gradient_norm=0.10, params_norm=33.37, time=2.87s
+Epoch 4, iter 500, train set: loss=0.0111, accuracy=1.00 (1591/1595), gradient_norm=0.08, params_norm=33.41, time=3.44s
+Evaluate dev data:
+  -Accuracy: 0.9265 (227/245)
+  -Update best model at 500, dev accuracy=0.9265
+Saving model to 9081372113/cfimdb-model.pt
+Loading model from 9081372113/cfimdb-model.pt
+  -Accuracy: 0.5102 (249/488)
+  -Save predictions to 9081372113/cfimdb-test-output.txt
+  -Accuracy: 0.9265 (227/245)
+  -Save predictions to 9081372113/cfimdb-dev-output.txt
+
