@@ -29,32 +29,47 @@ class AdamW(Optimizer):
         loss = None
         if closure is not None:
             loss = closure()
-
+        
         for group in self.param_groups:
             for p in group["params"]:
                 if p.grad is None:
                     continue
-                grad = p.grad.data
+                grad = p.grad.data # gradient of the loss w.r.t. the parameter p
                 if grad.is_sparse:
                     raise RuntimeError("Adam does not support sparse gradients, please consider SparseAdam instead")
-
-                raise NotImplementedError()
 
                 # State should be stored in this dictionary
                 state = self.state[p]
 
                 # Access hyperparameters from the `group` dictionary
                 alpha = group["lr"]
+                beta1, beta2 = group["betas"]
+                eps = group["eps"]
+
+                if len(state)==0:
+                    # Initialize state
+                    state["step"] = 0
+                    state["m0"] = torch.zeros_like(p.data)
+                    state["v0"] = torch.zeros_like(p.data)
+                
+                m0, v0 = state['m0'], state['v0']
+                state["step"] += 1
 
                 # Update first and second moments of the gradients
-
+                state["m0"] = beta1 * m0 + (1-beta1) * grad
+                state["v0"] = beta2 * v0 + (1-beta2) * grad**2
                 # Bias correction
-                # Please note that we are using the "efficient version" given in
-                # https://arxiv.org/abs/1412.6980
+                bias_correction1 = 1 - beta1 ** state['step']
+                bias_correction2 = 1 - beta2 ** state['step']
+                m0_hat = state["m0"] / bias_correction1
+                v0_hat = state["v0"] / bias_correction2
 
-                # Update parameters
+                # Compute the effective learning rate            
 
-                # Add weight decay after the main gradient-based updates.
-                # Please note that the learning rate should be incorporated into this update.
+                # Add weight decay before the main gradient-based updates.
+                # Please note that we are using the "efficient version" given in https://arxiv.org/abs/1412.6980
+                p.data -= alpha * group['weight_decay'] * p.data # update the weight decay
+                p.data -= alpha * m0_hat / ( v0_hat**0.5 + eps) # update the parameters
+
 
         return loss

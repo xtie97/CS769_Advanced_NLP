@@ -1,0 +1,68 @@
+args: {'train': 'data/sst-train.txt', 'dev': 'data/sst-dev.txt', 'test': 'data/sst-test.txt', 'seed': 1234, 'epochs': 20, 'option': 'pretrain', 'use_gpu': True, 'dev_out': '9081372113/sst-dev-output.txt', 'test_out': '9081372113/sst-test-output.txt', 'filepath': '9081372113/sst-model.pt', 'batch_size': 16, 'hidden_dropout_prob': 0.3, 'lr': 0.001}
+load 8544 data from data/sst-train.txt
+load 1101 data from data/sst-dev.txt
+save the model to 9081372113/sst-model.pt
+epoch 0: train loss :: 1.585, train acc :: 0.357, dev acc :: 0.357
+save the model to 9081372113/sst-model.pt
+epoch 1: train loss :: 1.530, train acc :: 0.368, dev acc :: 0.366
+epoch 2: train loss :: 1.500, train acc :: 0.361, dev acc :: 0.342
+save the model to 9081372113/sst-model.pt
+epoch 3: train loss :: 1.478, train acc :: 0.415, dev acc :: 0.379
+save the model to 9081372113/sst-model.pt
+epoch 4: train loss :: 1.479, train acc :: 0.422, dev acc :: 0.395
+epoch 5: train loss :: 1.462, train acc :: 0.426, dev acc :: 0.392
+epoch 6: train loss :: 1.464, train acc :: 0.382, dev acc :: 0.364
+epoch 7: train loss :: 1.463, train acc :: 0.381, dev acc :: 0.363
+epoch 8: train loss :: 1.459, train acc :: 0.394, dev acc :: 0.383
+save the model to 9081372113/sst-model.pt
+epoch 9: train loss :: 1.450, train acc :: 0.432, dev acc :: 0.409
+epoch 10: train loss :: 1.453, train acc :: 0.403, dev acc :: 0.376
+epoch 11: train loss :: 1.452, train acc :: 0.364, dev acc :: 0.339
+epoch 12: train loss :: 1.445, train acc :: 0.329, dev acc :: 0.323
+epoch 13: train loss :: 1.447, train acc :: 0.406, dev acc :: 0.382
+epoch 14: train loss :: 1.454, train acc :: 0.401, dev acc :: 0.385
+epoch 15: train loss :: 1.441, train acc :: 0.424, dev acc :: 0.403
+epoch 16: train loss :: 1.448, train acc :: 0.425, dev acc :: 0.403
+epoch 17: train loss :: 1.439, train acc :: 0.343, dev acc :: 0.326
+epoch 18: train loss :: 1.446, train acc :: 0.417, dev acc :: 0.386
+epoch 19: train loss :: 1.445, train acc :: 0.408, dev acc :: 0.383
+load model from 9081372113/sst-model.pt
+load 1101 data from data/sst-dev.txt
+load 2210 data from data/sst-test.txt
+dev acc :: 0.409
+test acc :: 0.429
+args: {'train': 'data/cfimdb-train.txt', 'dev': 'data/cfimdb-dev.txt', 'test': 'data/cfimdb-test.txt', 'seed': 1234, 'epochs': 20, 'option': 'pretrain', 'use_gpu': True, 'dev_out': '9081372113/cfimdb-dev-output.txt', 'test_out': '9081372113/cfimdb-test-output.txt', 'filepath': '9081372113/cfimdb-model.pt', 'batch_size': 16, 'hidden_dropout_prob': 0.3, 'lr': 0.001}
+load 1707 data from data/cfimdb-train.txt
+load 245 data from data/cfimdb-dev.txt
+save the model to 9081372113/cfimdb-model.pt
+epoch 0: train loss :: 0.717, train acc :: 0.619, dev acc :: 0.645
+epoch 1: train loss :: 0.667, train acc :: 0.627, dev acc :: 0.608
+epoch 2: train loss :: 0.664, train acc :: 0.582, dev acc :: 0.604
+save the model to 9081372113/cfimdb-model.pt
+epoch 3: train loss :: 0.645, train acc :: 0.723, dev acc :: 0.722
+save the model to 9081372113/cfimdb-model.pt
+epoch 4: train loss :: 0.628, train acc :: 0.714, dev acc :: 0.747
+epoch 5: train loss :: 0.624, train acc :: 0.742, dev acc :: 0.722
+epoch 6: train loss :: 0.613, train acc :: 0.641, dev acc :: 0.629
+epoch 7: train loss :: 0.628, train acc :: 0.589, dev acc :: 0.571
+epoch 8: train loss :: 0.607, train acc :: 0.728, dev acc :: 0.706
+save the model to 9081372113/cfimdb-model.pt
+epoch 9: train loss :: 0.607, train acc :: 0.734, dev acc :: 0.755
+save the model to 9081372113/cfimdb-model.pt
+epoch 10: train loss :: 0.610, train acc :: 0.759, dev acc :: 0.767
+epoch 11: train loss :: 0.591, train acc :: 0.775, dev acc :: 0.755
+epoch 12: train loss :: 0.587, train acc :: 0.619, dev acc :: 0.620
+epoch 13: train loss :: 0.588, train acc :: 0.755, dev acc :: 0.739
+save the model to 9081372113/cfimdb-model.pt
+epoch 14: train loss :: 0.605, train acc :: 0.782, dev acc :: 0.771
+epoch 15: train loss :: 0.593, train acc :: 0.704, dev acc :: 0.678
+save the model to 9081372113/cfimdb-model.pt
+epoch 16: train loss :: 0.579, train acc :: 0.791, dev acc :: 0.792
+epoch 17: train loss :: 0.580, train acc :: 0.769, dev acc :: 0.780
+epoch 18: train loss :: 0.572, train acc :: 0.774, dev acc :: 0.727
+epoch 19: train loss :: 0.582, train acc :: 0.773, dev acc :: 0.792
+load model from 9081372113/cfimdb-model.pt
+load 245 data from data/cfimdb-dev.txt
+load 488 data from data/cfimdb-test.txt
+dev acc :: 0.792
+test acc :: 0.504

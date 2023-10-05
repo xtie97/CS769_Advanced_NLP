@@ -25,7 +25,7 @@ required_files = {
     'cfimdb-test-output.txt', 
     'cfimdb-train-log.txt',
     'run_exp.sh',
-    'setup.py'
+    'setup.sh'
 }
 
 def check_file(file: str, check_aid: str):

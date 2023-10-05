@@ -1,3 +1,8 @@
+import os 
+os.environ['CURL_CA_BUNDLE'] = ''
+os.system("pip --trusted-host pypi.org --trusted-host files.pythonhosted.org install huggingface-hub --upgrade")
+os.system("pip --trusted-host pypi.org --trusted-host files.pythonhosted.org install -U transformers")
+os.system("pip --trusted-host pypi.org --trusted-host files.pythonhosted.org install requests==2.27.1")
 import torch
 from types import SimpleNamespace
 from bert import BertModel, BertSelfAttention, BertLayer 

@@ -1,5 +1,5 @@
 # Step 0. Change this to your campus ID
-CAMPUSID='9xx1234567'
+CAMPUSID='9081372113'
 mkdir -p $CAMPUSID
 
 # Step 1. (Optional) Any preprocessing step, e.g., downloading pre-trained word embeddings
@@ -12,6 +12,8 @@ python classifier.py \
     --use_gpu \
     --option finetune \
     --lr 1e-5 \
+    --batch_size 16 \
+    --epochs 20 \
     --seed 1234 \
     --train "data/${PREF}-train.txt" \
     --dev "data/${PREF}-dev.txt" \
@@ -26,6 +28,8 @@ python classifier.py \
     --use_gpu \
     --option finetune \
     --lr 1e-5 \
+    --batch_size 16 \
+    --epochs 20 \
     --seed 1234 \
     --train "data/${PREF}-train.txt" \
     --dev "data/${PREF}-dev.txt" \
@@ -33,7 +37,6 @@ python classifier.py \
     --dev_out "${CAMPUSID}/${PREF}-dev-output.txt" \
     --test_out "${CAMPUSID}/${PREF}-test-output.txt" \
     --filepath "${CAMPUSID}/${PREF}-model.pt" | tee ${CAMPUSID}/${PREF}-train-log.txt
-
 
 
 # Step 3. Prepare submission:
