@@ -27,7 +27,7 @@ In this assignment, I implemented the **transformer model (BERT)**, **linear pro
 
 
 ### Training Logs:
-Two separate log files record the training process:
+Four separate log files record the training process:
 1. `sst-train-log-finetune.txt`: Log for training the model on the SST dataset with `finetune` option. 
 2. `cfimdb-train-log-finetune.txt`: Log for training the model on the CFIMDB dataset with `finetune` option.
 3. `sst-train-log-pretrain.txt`: Log for training the model on the SST dataset with `pretrain` option.
