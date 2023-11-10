@@ -102,7 +102,12 @@ def topK(score):
         top_beamid = [[0, 2, 1], [2, 0, 1]]
         top_wordid = [[0, 2, 3], [2, 1, 3]]  
     """
-    raise NotImplementedError
+    batch_size, beam_size, vocab_size = score.size()
+    score = score.view(batch_size, -1)  # [batch_size, beam_size * vocab_size]
+    top_score, top_ids = torch.topk(score, k=beam_size, dim=-1)  
+    top_beamid = top_ids // vocab_size  
+    top_wordid = top_ids % vocab_size  
+    return top_score, top_beamid, top_wordid
 
 
 def select_hiddens_by_beams(hiddens, beam_id):
@@ -130,8 +135,14 @@ def select_hiddens_by_beams(hiddens, beam_id):
                                         [0.9372, 0.4993, 0.5471, 0.9169],
                                         [0.9372, 0.4993, 0.5471, 0.9169]]])
     """
-    raise NotImplementedError
+    # beam_id: [batch_size, beam_size], hiddens: [batch_size, beam_size, hidden_size, num_layers]
+    for _ in range(len(hiddens.size()) - 2):
+        beam_id = beam_id.unsqueeze(dim=-1) 
 
+    beam_id = beam_id.expand_as(hiddens)
+    new_hiddens = torch.gather(hiddens, dim=1, index=beam_id)  
+    return new_hiddens
+    
 
 def extract_sequences(top_score, top_wordids, top_beamids):
     """
@@ -147,6 +158,19 @@ def extract_sequences(top_score, top_wordids, top_beamids):
     Example: 
         See inputs and expected outputs in test_extract_sequences().
     """
-    raise NotImplementedError
+
+    batch_size, beam_size = top_score.size()
+    sort_score, sort_score_id = top_score.sort(dim=-1, descending=True) # [batch_size, beam_size]
+    decode_max_length = len(top_wordids)
+    top_wordids = [torch.gather(top_wordid, 1, sort_score_id) for top_wordid in top_wordids]
+    top_beamids = [torch.gather(top_beamid, 1, sort_score_id) for top_beamid in top_beamids]
+    # define sequences as a tensor to store the top K generated sequences
+    sequences = torch.zeros((batch_size, beam_size, decode_max_length), dtype=torch.long)
+    for step in range(decode_max_length-1, -1, -1):
+        sequences[..., step] = top_wordids[step].clone()
+        top_wordids[step-1] = torch.gather(top_wordids[step-1], 1, top_beamids[step])
+        top_beamids[step-1] = torch.gather(top_beamids[step-1], 1, top_beamids[step])
+    
+    return sequences, sort_score
 
  
